@@ -51,6 +51,13 @@
           <label for="phone">What's your phone number?:</label>
           <div class="form-group input-group phone-number-0">
               <input type="text" class="form-control phone-number" name="phone" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <select class="form-control phone-number-type" name="phone_type">
+                  <option>Mobile</option>
+                  <option>Home</option>
+                  <option>Office</option>
+                  <option>Fax</option>
+                  <option>Other</option>
+              </select>
               <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-phone-number">+ (Add a another Phone Number)</button>
               </div>
@@ -103,6 +110,21 @@
             let nick_name = $("input[name=nick_name]").val();
             let dob = $("input[name=dob]").val();
             let gender = $("input[name=gender]").val();
+            let phone_numbers = [];
+            let phone_numbers_type = [];
+            let emails = [];
+            $('.phone-number').each(function(){
+                phone_numbers.push($(this).val());
+                }
+            );
+            $('.phone-number-type').each(function(){
+                    phone_numbers_type.push($(this).val());
+                }
+            );
+            $('.email').each(function(){
+                    emails.push($(this).val());
+                }
+            );
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -112,9 +134,9 @@
             $.ajax({
                 type:'POST',
                 url:"{{ route('contacts.store') }}",
-                data:{first_name:first_name, last_name:last_name, nick_name:nick_name,dob:dob,gender:gender},
+                data:{first_name:first_name, last_name:last_name, nick_name:nick_name,dob:dob,gender:gender,phone_numbers:phone_numbers,phone_numbers_type:phone_numbers_type,emails:emails},
                 success:function(data){
-                    console.info('Ajax Call: Create contact - success');
+                    console.log('Ajax Call: Create contact - success');
                     window.location.replace("{{ route('contacts.index') }}")
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -136,7 +158,14 @@
                     let newPhoneDivClass = 'phone-number-'+phoneNumberCount;
                     let newPhoneButtonClass = 'button-remove-phone-'+phoneNumberCount;
                     $('.phone-number-0').prepend('<div class="form-group input-group '+newPhoneDivClass+'">\n' +
-                        '              <input type="text" class="form-control phone-number" name="phone_'+phoneNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '   <input type="text" class="form-control phone-number" name="phone_'+phoneNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '       <select class="form-control phone-number-type" name="phone_type_'+phoneNumberCount+'">\n' +
+                        '           <option>Mobile</option>\n' +
+                        '           <option>Home</option>\n' +
+                        '           <option>Office</option>\n' +
+                        '           <option>Fax</option>\n' +
+                        '           <option>Other</option>\n' +
+                        '       </select>\n' +
                         '              <div class="input-group-append">\n' +
                         '                  <button class="btn btn-outline-secondary '+newPhoneButtonClass+'" number="'+phoneNumberCount+'" type="button" id="remove-phone-'+phoneNumberCount+'" >- (Remove Phone Number)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
                         '              </div>\n' +
@@ -274,6 +303,7 @@
                     email_4: "Please enter a valid email address"
                 },
                 submitHandler: function(form) {
+                    //form.submit();
                     submitForm(form);
                 }
             });
