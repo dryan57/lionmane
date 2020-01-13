@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contact;
 use App\Telephone;
+use App\Email;
 
 class ContactController extends Controller
 {
@@ -63,6 +64,12 @@ class ContactController extends Controller
                     $telephone = new Telephone(['contact_id' => $contactToUpdate->id,'phone_number'=>$value,'category'=>$telephone_type]);
                     $contactToUpdate->telephones()->save($telephone);
                 }
+                foreach ($request->get('emails') as $key=>$value) {
+                    $email_type = $request->get('emails_type')[$key];
+                    $email = new Email(['contact_id' => $contactToUpdate->id,'email'=>$value,'category'=>$email_type]);
+                    $contactToUpdate->emails()->save($email);
+                }
+
                 return redirect('/contacts')->with('success', 'Contact saved!');
     }
 
