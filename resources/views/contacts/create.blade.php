@@ -95,8 +95,32 @@
                         mask: /^\S*@?\S*$/
                     });
             });
-
-
+        }
+        function submitForm(form)
+        {
+            let first_name = $("input[name=first_name]").val();
+            let last_name = $("input[name=last_name]").val();
+            let nick_name = $("input[name=nick_name]").val();
+            let dob = $("input[name=dob]").val();
+            let gender = $("input[name=gender]").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            });
+            console.info('Ajax Call: Create contact');
+            $.ajax({
+                type:'POST',
+                url:"{{ route('contacts.store') }}",
+                data:{first_name:first_name, last_name:last_name, nick_name:nick_name,dob:dob,gender:gender},
+                success:function(data){
+                    console.info('Ajax Call: Create contact - success');
+                    window.location.replace("{{ route('contacts.index') }}")
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.error('Ajax Call: Create contact - Error '+errorThrown);
+                }
+            });
         }
         $(document).ready(function () {
             initInput();
@@ -250,7 +274,7 @@
                     email_4: "Please enter a valid email address"
                 },
                 submitHandler: function(form) {
-                    form.submit();
+                    submitForm(form);
                 }
             });
         });
