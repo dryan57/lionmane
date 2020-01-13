@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use App\Telephone;
 
 class ContactController extends Controller
 {
@@ -56,6 +57,11 @@ class ContactController extends Controller
                     'active' => 1
                 ]);
                 $contact->save();
+                $contactToUpdate = Contact::find($contact->id);
+                foreach ($request->get('phone_numbers') as $value) {
+                    $telephone = new Telephone(['contact_id' => $contactToUpdate->id,'phone_number'=>$value,'category'=>'mobile']);
+                    $contactToUpdate->telephones()->save($telephone);
+                }
                 return redirect('/contacts')->with('success', 'Contact saved!');
     }
 
