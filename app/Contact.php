@@ -19,4 +19,9 @@ class Contact extends Model
     {
         return $this->hasMany('App\Telephone');
     }
+
+    public function emails()
+    {
+        return $this->hasMany('App\Email');
+    }
 }
