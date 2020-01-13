@@ -24,30 +24,30 @@
             <div class="form-group">
 
                 <label for="first_name">What’s your first name?:</label>
-                <input type="text" class="form-control" name="first_name" value={{ $contact->first_name }} />
+                <input type="text" class="form-control" name="first_name" value="" />
             </div>
 
             <div class="form-group">
                 <label for="last_name">What’s your last name?:</label>
-                <input type="text" class="form-control" name="last_name" value={{ $contact->last_name }} />
+                <input type="text" class="form-control" name="last_name" value="" />
             </div>
 
             <div class="form-group">
                 <label for="nick_name">What’s your nickname?:</label>
-                <input type="text" class="form-control" name="nick_name" value={{ $contact->nick_name }} />
+                <input type="text" class="form-control" name="nick_name" value="" />
             </div>
             <div class="form-group">
                 <label for="dob">hen were you born?:</label>
-                <input type="text" class="form-control" name="dob" value={{ $contact->dob }} id="dob" />
+                <input type="text" class="form-control" name="dob" value="" id="dob" />
             </div>
             <label for="gender">What’s your gender?:</label>
             <div class="form-group">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" {{ ($contact->gender == 1)? 'checked' : '' }} >
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male"  >
                     <label class="form-check-label" for="inlineRadio1">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female"{{ ($contact->gender == 0)? 'checked' : ''}} >
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" >
                     <label class="form-check-label" for="inlineRadio2">Female</label>
                  </div>
             </div>
