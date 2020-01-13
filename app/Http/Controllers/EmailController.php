@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Email;
 
 class EmailController extends Controller
 {
@@ -34,7 +35,12 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $email = new Email([
+            'contact_id' => $request->get('contact_id'),
+            'email' => $request->get('email'),
+            'category' => $request->get('category')
+        ]);
+        $email->save();
     }
 
     /**
