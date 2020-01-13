@@ -1,4 +1,8 @@
 @extends('base')
+@section('header')
+    @parent
+@endsection
+
 @section('main')
 <div class="row">
     <div class="col-sm-8 offset-sm-2">
@@ -34,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label for="dob">DOB:</label>
-                <input type="text" class="form-control" name="dob" value={{ $contact->dob }} />
+                <input type="text" class="form-control" name="dob" value={{ $contact->dob }} id="dob" />
             </div>
             <div class="form-group">
                 <label for="gender">Gender:</label>
