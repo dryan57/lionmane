@@ -15,4 +15,8 @@ class Contact extends Model
             'image',
             'active'
         ];
+    public function telephones()
+    {
+        return $this->hasMany('App\Telephone');
+    }
 }
