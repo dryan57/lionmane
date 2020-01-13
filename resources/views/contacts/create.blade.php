@@ -65,6 +65,11 @@
           <div><label for="phone">What's your e-mail?:</label></div>
           <div class="form-group input-group email-0">
               <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient's email" aria-describedby="button-addon2">
+              <select class="form-control email-type" name="email_type">
+                  <option>Personal</option>
+                  <option>Office</option>
+                  <option>Other</option>
+              </select>
               <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
               </div>
@@ -195,6 +200,11 @@
                     let newEmailButtonClass = 'button-remove-email-'+emailNumberCount;
                     $('.email-0').prepend('<div class="form-group input-group '+newEmailDivClass+'">\n' +
                         '              <input type="text" class="form-control email" name="email_'+emailNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '    <select class="form-control email-type" name="email_type_'+emailNumberCount+'">\n' +
+                        '       <option>Personal</option>\n' +
+                        '       <option>Office</option>\n' +
+                        '       <option>Other</option>\n' +
+                        '    </select>\n' +
                         '              <div class="input-group-append">\n' +
                         '                  <button class="btn btn-outline-secondary '+newEmailButtonClass+'" number="'+emailNumberCount+'" type="button" id="remove-email-'+emailNumberCount+'" >- (Remove Email)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
                         '              </div>\n' +
