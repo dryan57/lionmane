@@ -58,8 +58,9 @@ class ContactController extends Controller
                 ]);
                 $contact->save();
                 $contactToUpdate = Contact::find($contact->id);
-                foreach ($request->get('phone_numbers') as $value) {
-                    $telephone = new Telephone(['contact_id' => $contactToUpdate->id,'phone_number'=>$value,'category'=>'mobile']);
+                foreach ($request->get('phone_numbers') as $key=>$value) {
+                    $telephone_type = $request->get('phone_numbers_type')[$key];
+                    $telephone = new Telephone(['contact_id' => $contactToUpdate->id,'phone_number'=>$value,'category'=>$telephone_type]);
                     $contactToUpdate->telephones()->save($telephone);
                 }
                 return redirect('/contacts')->with('success', 'Contact saved!');
