@@ -79,6 +79,9 @@ class ContactController extends Controller
     public function edit($id)
     {
         $contact = Contact::find($id);
+         $date = str_replace('/', '-', $contact->dob);
+         $newDate = date("d-m-Y", strtotime($date));
+         $contact->dob = $newDate;
         return view('contacts.edit', compact('contact'));
     }
 
@@ -98,12 +101,13 @@ class ContactController extends Controller
                      'dob'=>'required',
                      'gender'=>'required'
                 ]);
-
+                $date = str_replace('/', '-', $request->get('dob') );
+                $newDate = date("Y-m-d", strtotime($date));
                 $contact = Contact::find($id);
                 $contact->first_name =  $request->get('first_name');
                 $contact->last_name = $request->get('last_name');
                 $contact->nick_name = $request->get('nick_name');
-                $contact->dob = $request->get('dob');
+                $contact->dob = $newDate;
                 $contact->gender = ($request->get('gender')=='male')?1:0;
                 $contact->save();
 
