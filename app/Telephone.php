@@ -11,4 +11,9 @@ class Telephone extends Model
             'phone_number',
             'category'
         ];
+
+    public function contact()
+    {
+        return $this->belongsTo('App\Contact');
+    }
 }
