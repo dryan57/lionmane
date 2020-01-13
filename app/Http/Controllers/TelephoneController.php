@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Telephone;
 
 class TelephoneController extends Controller
 {
@@ -34,7 +35,13 @@ class TelephoneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $telephone = new Telephone([
+            'contact_id' => $request->get('contact_id'),
+            'phone_number' => $request->get('phone_number'),
+            'category' => $request->get('category')
+        ]);
+        $telephone->save();
     }
 
     /**
