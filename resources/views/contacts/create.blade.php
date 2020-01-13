@@ -17,7 +17,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('contacts.store') }}">
+      <form method="post" action="{{ route('contacts.store') }}" name="contact">
           @csrf
           <div class="form-group">
               <label for="first_name">What’s your first name?:</label>
@@ -37,7 +37,7 @@
               <label for="dob">When were you born?:</label>
               <input type="text" class="form-control" name="dob" id="dob"/>
           </div>
-          <label for="gender">What’s your gender?:</label>
+          <div><label for="gender">What’s your gender?:</label></div>
           <div class="form-group">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
@@ -55,14 +55,14 @@
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-phone-number">+ (Add a another Phone Number)</button>
               </div>
           </div>
-          <label for="phone">What's your e-mail?:</label>
+          <div><label for="phone">What's your e-mail?:</label></div>
           <div class="form-group input-group email-0">
               <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient's email" aria-describedby="button-addon2">
               <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
               </div>
           </div>
-          <button type="submit" class="btn btn-primary-outline" id="btn-submit">Add contact</button>
+          <button type="submit" class="btn btn-outline-secondary" id="btn-submit">Add contact</button>
       </form>
   </div>
 </div>
@@ -77,14 +77,15 @@
                 document.getElementById('dob'),
                 {
                     mask: Date,
-                    min: new Date(1990, 0, 1),
+                    /*pattern: 'd{-}`m{-}`Y',*/
+                    min: new Date(1930, 0, 1),
                     max: new Date(2020, 0, 1),
                     lazy: false
                 });
             document.querySelectorAll('.phone-number').forEach(function(input) {
                 IMask(
                     input, {
-                        mask: '0000-0000'
+                        mask: '00000000'
                     })
             });
             document.querySelectorAll('.email').forEach(function(input){
@@ -101,7 +102,7 @@
             initInput();
             /*Code that handles the multiple phone numbers*/
             let phoneNumberCount = 0;
-            let phoneNumberInputs = 0;
+            let phoneNumberInputs = 1;
             $('#button-addon-phone-number').click(function()
             {
                 phoneNumberCount++;
@@ -111,7 +112,7 @@
                     let newPhoneDivClass = 'phone-number-'+phoneNumberCount;
                     let newPhoneButtonClass = 'button-remove-phone-'+phoneNumberCount;
                     $('.phone-number-0').prepend('<div class="form-group input-group '+newPhoneDivClass+'">\n' +
-                        '              <input type="text" class="form-control phone-number" name="phone" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '              <input type="text" class="form-control phone-number" name="phone_'+phoneNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
                         '              <div class="input-group-append">\n' +
                         '                  <button class="btn btn-outline-secondary '+newPhoneButtonClass+'" number="'+phoneNumberCount+'" type="button" id="remove-phone-'+phoneNumberCount+'" >- (Remove Phone Number)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
                         '              </div>\n' +
@@ -130,7 +131,7 @@
             });
             /*Code that handle multiple email*/
             let emailNumberCount = 0;
-            let emailNumberInputs = 0;
+            let emailNumberInputs = 1;
             $('#button-addon-email').click(function()
             {
                 emailNumberCount++;
@@ -140,7 +141,7 @@
                     let newEmailDivClass = 'email-'+emailNumberCount;
                     let newEmailButtonClass = 'button-remove-email-'+emailNumberCount;
                     $('.email-0').prepend('<div class="form-group input-group '+newEmailDivClass+'">\n' +
-                        '              <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '              <input type="text" class="form-control email" name="email_'+emailNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
                         '              <div class="input-group-append">\n' +
                         '                  <button class="btn btn-outline-secondary '+newEmailButtonClass+'" number="'+emailNumberCount+'" type="button" id="remove-email-'+emailNumberCount+'" >- (Remove Email)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
                         '              </div>\n' +
@@ -155,6 +156,101 @@
                 else
                 {
                     alert('You only can add up to 5 emails.')
+                }
+            });
+            $("form[name='contact']").validate({
+                rules: {
+                    first_name: "required",
+                    last_name: "required",
+                    nick_name: "required",
+                    dob:"required",
+                    gender:"required",
+                    phone:{
+                        required:true,
+                        minlength:8,
+                        maxlength:8,
+                    },
+                    phone_1:{
+                        required:true,
+                        minlength:8,
+                        maxlength:8,
+                    },
+                    phone_2:{
+                        required:true,
+                        minlength:8,
+                        maxlength:8,
+                    },
+                    phone_3:{
+                        required:true,
+                        minlength:8,
+                        maxlength:8,
+                    },
+                    phone_4:{
+                        required:true,
+                        minlength:8,
+                        maxlength:8,
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    email_1: {
+                        required: true,
+                        email: true
+                    },
+                    email_2: {
+                        required: true,
+                        email: true
+                    },
+                    email_3: {
+                        required: true,
+                        email: true
+                    },
+                    email_4: {
+                        required: true,
+                        email: true
+                    },
+                },
+                // Specify validation error messages
+                messages: {
+                    first_name: "Please enter your first name",
+                    last_name: "Please enter your last name",
+                    nick_name: "Please enter your nickname",
+                    dob: "Please enter your date of birth",
+                    gender: "Please enter your gender",
+                    phone: {
+                        required:"Please enter your phone number",
+                        minlength: "Your phone number must have 8 digits",
+                        maxlength: "Your phone number must have 8 digits",
+                    },
+                    phone_1: {
+                        required:"Please enter your phone number",
+                        minlength: "Your phone number must have 8 digits",
+                        maxlength: "Your phone number must have 8 digits",
+                    },
+                    phone_2: {
+                        required:"Please enter your phone number",
+                        minlength: "Your phone number must have 8 digits",
+                        maxlength: "Your phone number must have 8 digits",
+                    },
+                    phone_3: {
+                        required:"Please enter your phone number",
+                        minlength: "Your phone number must have 8 digits",
+                        maxlength: "Your phone number must have 8 digits",
+                    },
+                    phone_4: {
+                        required:"Please enter your phone number",
+                        minlength: "Your phone number must have 8 digits",
+                        maxlength: "Your phone number must have 8 digits",
+                    },
+                    email: "Please enter a valid email address",
+                    email_1: "Please enter a valid email address",
+                    email_2: "Please enter a valid email address",
+                    email_3: "Please enter a valid email address",
+                    email_4: "Please enter a valid email address"
+                },
+                submitHandler: function(form) {
+                    form.submit();
                 }
             });
         });
