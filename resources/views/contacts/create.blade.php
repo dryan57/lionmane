@@ -118,6 +118,7 @@
             let phone_numbers = [];
             let phone_numbers_type = [];
             let emails = [];
+            let emails_type = [];
             $('.phone-number').each(function(){
                 phone_numbers.push($(this).val());
                 }
@@ -130,6 +131,10 @@
                     emails.push($(this).val());
                 }
             );
+            $('.email-type').each(function(){
+                    emails_type.push($(this).val());
+                }
+            );
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -139,7 +144,7 @@
             $.ajax({
                 type:'POST',
                 url:"{{ route('contacts.store') }}",
-                data:{first_name:first_name, last_name:last_name, nick_name:nick_name,dob:dob,gender:gender,phone_numbers:phone_numbers,phone_numbers_type:phone_numbers_type,emails:emails},
+                data:{first_name:first_name, last_name:last_name, nick_name:nick_name,dob:dob,gender:gender,phone_numbers:phone_numbers,phone_numbers_type:phone_numbers_type,emails:emails,emails_type:emails_type},
                 success:function(data){
                     console.log('Ajax Call: Create contact - success');
                     window.location.replace("{{ route('contacts.index') }}")
