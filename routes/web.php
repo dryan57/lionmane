@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::resource('contacts', 'ContactController');
 Route::resource('telephones', 'TelephoneController');
+Route::resource('emails', 'EmailController');
