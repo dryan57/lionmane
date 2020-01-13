@@ -1,4 +1,7 @@
 @extends('base')
+@section('header')
+    @parent
+@endsection
 
 @section('main')
 <div class="row">
@@ -31,11 +34,11 @@
           </div>
 
           <div class="form-group">
-              <label for="email">When were you born?:</label>
-              <input type="text" class="form-control" name="dob"/>
+              <label for="dob">When were you born?:</label>
+              <input type="text" class="form-control" name="dob" id="dob"/>
           </div>
+          <label for="gender">What’s your gender?:</label>
           <div class="form-group">
-              <label for="gender">What’s your gender?:</label>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
                 <label class="form-check-label" for="inlineRadio1">Male</label>
@@ -45,9 +48,57 @@
                 <label class="form-check-label" for="inlineRadio2">Female</label>
               </div>
           </div>
-          <button type="submit" class="btn btn-primary-outline">Add contact</button>
+          <label for="phone">What's your phone number?:</label>
+          <div class="form-group input-group mb-3">
+              <input type="text" class="form-control phone-number" name="phone" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon-phone-number">+ (Add a another Phone Number)</button>
+              </div>
+          </div>
+          <label for="phone">What's your e-mail?:</label>
+          <div class="form-group input-group mb-3">
+              <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient's email" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary-outline" id="btn-submit">Add contact</button>
       </form>
   </div>
 </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        function initInput()
+        {
+            IMask(
+                document.getElementById('dob'),
+                {
+                    mask: Date,
+                    min: new Date(1990, 0, 1),
+                    max: new Date(2020, 0, 1),
+                    lazy: false
+                });
+            document.querySelectorAll('.phone-number').forEach(function(input) {
+                IMask(
+                    input, {
+                        mask: '0000-0000'
+                    })
+            });
+            document.querySelectorAll('.email').forEach(function(input){
+                IMask(
+                    input,
+                    {
+                        mask: /^\S*@?\S*$/
+                    });
+            });
+
+
+        }
+        $(document).ready(function () {
+            initInput();
+        });
+    </script>
+@stop
