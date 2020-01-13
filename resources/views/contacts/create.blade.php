@@ -49,14 +49,14 @@
               </div>
           </div>
           <label for="phone">What's your phone number?:</label>
-          <div class="form-group input-group mb-3">
+          <div class="form-group input-group phone-number-0">
               <input type="text" class="form-control phone-number" name="phone" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
               <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-phone-number">+ (Add a another Phone Number)</button>
               </div>
           </div>
           <label for="phone">What's your e-mail?:</label>
-          <div class="form-group input-group mb-3">
+          <div class="form-group input-group mb-0">
               <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient's email" aria-describedby="button-addon2">
               <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -99,6 +99,34 @@
         }
         $(document).ready(function () {
             initInput();
+            let phoneNumberCount = 0;
+            let phoneNumberInputs = 0;
+            $('#button-addon-phone-number').click(function()
+            {
+                phoneNumberCount++;
+                if (phoneNumberInputs<=4)
+                {
+                    phoneNumberInputs++;
+                    let newPhoneDivClass = 'phone-number-'+phoneNumberCount;
+                    let newPhoneButtonClass = 'button-remove-phone-'+phoneNumberCount;
+                    $('.phone-number-0').prepend('<div class="form-group input-group '+newPhoneDivClass+'">\n' +
+                        '              <input type="text" class="form-control phone-number" name="phone" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '              <div class="input-group-append">\n' +
+                        '                  <button class="btn btn-outline-secondary '+newPhoneButtonClass+'" number="'+phoneNumberCount+'" type="button" id="remove-phone-'+phoneNumberCount+'" >- (Remove Phone Number)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
+                        '              </div>\n' +
+                        '          </div>');
+                    $('.'+newPhoneButtonClass).click(function()
+                    {
+                        phoneNumberInputs--;
+                        $('.'+newPhoneDivClass).remove();
+                    });
+                    initInput();
+                }
+                else
+                {
+                    alert('You only can add up to 5 phone numbers.')
+                }
+            });
         });
     </script>
 @stop
