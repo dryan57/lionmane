@@ -23,25 +23,25 @@
             @csrf
             <div class="form-group">
 
-                <label for="first_name">First Name:</label>
+                <label for="first_name">What’s your first name?:</label>
                 <input type="text" class="form-control" name="first_name" value={{ $contact->first_name }} />
             </div>
 
             <div class="form-group">
-                <label for="last_name">Last Name:</label>
+                <label for="last_name">What’s your last name?:</label>
                 <input type="text" class="form-control" name="last_name" value={{ $contact->last_name }} />
             </div>
 
             <div class="form-group">
-                <label for="nick_name">NickName:</label>
+                <label for="nick_name">What’s your nickname?:</label>
                 <input type="text" class="form-control" name="nick_name" value={{ $contact->nick_name }} />
             </div>
             <div class="form-group">
-                <label for="dob">DOB:</label>
+                <label for="dob">hen were you born?:</label>
                 <input type="text" class="form-control" name="dob" value={{ $contact->dob }} id="dob" />
             </div>
+            <label for="gender">What’s your gender?:</label>
             <div class="form-group">
-                <label for="gender">Gender:</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" {{ ($contact->gender == 1)? 'checked' : '' }} >
                     <label class="form-check-label" for="inlineRadio1">Male</label>
@@ -51,7 +51,33 @@
                     <label class="form-check-label" for="inlineRadio2">Female</label>
                  </div>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <label for="phone">What's your phone number?:</label>
+            <div class="form-group input-group phone-number-0">
+                <input type="text" class="form-control phone-number" name="phone" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <select class="form-control phone-number-type" name="phone_type">
+                    <option>Mobile</option>
+                    <option>Home</option>
+                    <option>Office</option>
+                    <option>Fax</option>
+                    <option>Other</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon-phone-number">+ (Add a another Phone Number)</button>
+                </div>
+            </div>
+            <div><label for="phone">What's your e-mail?:</label></div>
+            <div class="form-group input-group email-0">
+                <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient's email" aria-describedby="button-addon2">
+                <select class="form-control email-type" name="email_type">
+                    <option>Personal</option>
+                    <option>Office</option>
+                    <option>Other</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Contact</button>
         </form>
     </div>
 </div>
