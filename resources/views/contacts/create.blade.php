@@ -56,7 +56,7 @@
               </div>
           </div>
           <label for="phone">What's your e-mail?:</label>
-          <div class="form-group input-group mb-0">
+          <div class="form-group input-group email-0">
               <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient's email" aria-describedby="button-addon2">
               <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -99,6 +99,7 @@
         }
         $(document).ready(function () {
             initInput();
+            /*Code that handles the multiple phone numbers*/
             let phoneNumberCount = 0;
             let phoneNumberInputs = 0;
             $('#button-addon-phone-number').click(function()
@@ -125,6 +126,35 @@
                 else
                 {
                     alert('You only can add up to 5 phone numbers.')
+                }
+            });
+            /*Code that handle multiple email*/
+            let emailNumberCount = 0;
+            let emailNumberInputs = 0;
+            $('#button-addon-email').click(function()
+            {
+                emailNumberCount++;
+                if (emailNumberInputs<=4)
+                {
+                    emailNumberInputs++;
+                    let newEmailDivClass = 'email-'+emailNumberCount;
+                    let newEmailButtonClass = 'button-remove-email-'+emailNumberCount;
+                    $('.email-0').prepend('<div class="form-group input-group '+newEmailDivClass+'">\n' +
+                        '              <input type="text" class="form-control email" name="email" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
+                        '              <div class="input-group-append">\n' +
+                        '                  <button class="btn btn-outline-secondary '+newEmailButtonClass+'" number="'+emailNumberCount+'" type="button" id="remove-email-'+emailNumberCount+'" >- (Remove Email)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
+                        '              </div>\n' +
+                        '          </div>');
+                    $('.'+newEmailButtonClass).click(function()
+                    {
+                        emailNumberInputs--;
+                        $('.'+newEmailDivClass).remove();
+                    });
+                    initInput();
+                }
+                else
+                {
+                    alert('You only can add up to 5 emails.')
                 }
             });
         });
