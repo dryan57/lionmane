@@ -161,6 +161,16 @@ class ContactController extends Controller
     public function destroy($id)
     {
         $contact = Contact::find($id);
+        $telephones = $contact->telephones;
+        foreach ($telephones as $telephone)
+        {
+            Telephone::destroy($telephone->id);
+        }
+        $emails = $contact->emails;
+        foreach ($emails as $email)
+        {
+            Email::destroy($email->id);
+        }
         $contact->delete();
         return redirect('/contacts')->with('success', 'Contact deleted!');
     }
