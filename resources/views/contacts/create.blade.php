@@ -167,7 +167,7 @@
                     phoneNumberInputs++;
                     let newPhoneDivClass = 'phone-number-'+phoneNumberCount;
                     let newPhoneButtonClass = 'button-remove-phone-'+phoneNumberCount;
-                    $('.phone-number-0').prepend('<div class="form-group input-group '+newPhoneDivClass+'">\n' +
+                    $('.phone-number-0').after('<div class="form-group input-group '+newPhoneDivClass+'">\n' +
                         '   <input type="text" class="form-control phone-number" name="phone_'+phoneNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
                         '       <select class="form-control phone-number-type" name="phone_type_'+phoneNumberCount+'">\n' +
                         '           <option>Mobile</option>\n' +
@@ -203,7 +203,7 @@
                     emailNumberInputs++;
                     let newEmailDivClass = 'email-'+emailNumberCount;
                     let newEmailButtonClass = 'button-remove-email-'+emailNumberCount;
-                    $('.email-0').prepend('<div class="form-group input-group '+newEmailDivClass+'">\n' +
+                    $('.email-0').after('<div class="form-group input-group '+newEmailDivClass+'">\n' +
                         '              <input type="text" class="form-control email" name="email_'+emailNumberCount+'" placeholder="" aria-label="Recipient\'s username" aria-describedby="button-addon2">\n' +
                         '    <select class="form-control email-type" name="email_type_'+emailNumberCount+'">\n' +
                         '       <option>Personal</option>\n' +
