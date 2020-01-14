@@ -138,14 +138,18 @@ class ContactController extends Controller
                     $telephone = new Telephone(['contact_id' => $contact->id,'phone_number'=>$value,'category'=>$telephone_type]);
                     $contact->telephones()->save($telephone);
                 }
-
-              /*  foreach ($request->get('emails') as $key=>$value) {
+                $emails = $contact->emails;
+                foreach ($emails as $email)
+                {
+                    Email::destroy($email->id);
+                }
+                foreach ($request->get('emails') as $key=>$value) {
                     $email_type = $request->get('emails_type')[$key];
                     $email = new Email(['contact_id' => $contact->id,'email'=>$value,'category'=>$email_type]);
                     $contact->emails()->save($email);
-                }*/
+                }
 
-        return redirect('/contacts')->with('success', 'Contact updated!');
+        return ['success', 'Contact updated!'];
     }
 
     /**
