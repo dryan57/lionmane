@@ -14,7 +14,8 @@ class TelephoneController extends Controller
      */
     public function index()
     {
-        //
+        $telephone = Telephone::all();
+        return $telephone;
     }
 
     /**
@@ -75,7 +76,11 @@ class TelephoneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $telephone = Telephone::find($id);
+        $telephone->contact_id = $request->get('contact_id');
+        $telephone->phone_number = $request->get('phone_number');
+        $telephone->category = $request->get('category');
+        $telephone->save();
     }
 
     /**
@@ -86,6 +91,7 @@ class TelephoneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $telephone = Telephone::find($id);
+        $telephone->delete();
     }
 }
