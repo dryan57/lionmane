@@ -85,6 +85,7 @@ class EmailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $email = Email::find($id);
+        $email->delete();
     }
 }
