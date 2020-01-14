@@ -81,7 +81,11 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-
+        $contact = Contact::find($id);
+        $date = str_replace('/', '-', $contact->dob);
+        $newDate = date("d-m-Y", strtotime($date));
+        $contact->dob = $newDate;
+        return compact('contact',$contact->telephones,$contact->emails);
     }
 
     /**
