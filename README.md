@@ -45,6 +45,7 @@ Run the following command to seed our data base with sample data:
     $ php artisan db:seed
     
 This command will start a development server at http://localhost:8000:
+
     $ php artisan serve
 
 
