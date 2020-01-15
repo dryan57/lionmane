@@ -74,7 +74,7 @@
                     <option>Other</option>
                 </select>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Update Contact</button>
@@ -230,7 +230,7 @@
                         '           <option>Other</option>\n' +
                         '       </select>\n' +
                         '              <div class="input-group-append">\n' +
-                        '                  <button class="btn btn-outline-secondary '+newPhoneButtonClass+'" number="'+phoneNumberCount+'" type="button" id="remove-phone-'+phoneNumberCount+'" >- (Remove Phone Number)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
+                        '                  <button class="btn btn-outline-secondary remove-button '+newPhoneButtonClass+'" number="'+phoneNumberCount+'" type="button" id="remove-phone-'+phoneNumberCount+'" >- (Remove Phone Number)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
                         '              </div>\n' +
                         '          </div>');
                     $('.'+newPhoneButtonClass).click(function()
@@ -264,7 +264,7 @@
                         '       <option>Other</option>\n' +
                         '    </select>\n' +
                         '              <div class="input-group-append">\n' +
-                        '                  <button class="btn btn-outline-secondary '+newEmailButtonClass+'" number="'+emailNumberCount+'" type="button" id="remove-email-'+emailNumberCount+'" >- (Remove Email)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
+                        '                  <button class="btn btn-outline-secondary remove-button '+newEmailButtonClass+'" number="'+emailNumberCount+'" type="button" id="remove-email-'+emailNumberCount+'" >- (Remove Email)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>\n' +
                         '              </div>\n' +
                         '          </div>');
                     $('.'+newEmailButtonClass).click(function()
