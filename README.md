@@ -1,5 +1,9 @@
 ## Installation Guide
 
+Clone repository from:
+
+    https://github.com/dryan57/lionmane.git
+
 Install Composer
 
 Download from here (https://getcomposer.org/download/)
