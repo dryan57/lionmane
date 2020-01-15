@@ -20,7 +20,8 @@ When prompted, enter the password for your MySQL server when you've installed it
 
 Next, run the following SQL statement to create a db database:
 
-mysql> create database contact;
+    mysql> create database contact;
+
 Open the .env file and update the credentials to access your MySQL database:
 
     DB_CONNECTION=mysql
@@ -38,6 +39,6 @@ generate key with artisan
     
     $ php artisan db:seed
     
-    $php artisan serve
+    $ php artisan serve
 
 
