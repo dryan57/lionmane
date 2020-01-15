@@ -164,7 +164,7 @@
             let last_name = $("input[name=last_name]").val();
             let nick_name = $("input[name=nick_name]").val();
             let dob = $("input[name=dob]").val();
-            let gender = $("input[name=gender]").val();
+            let gender = $("input:radio[name=gender]:checked").val();
             let phone_numbers = [];
             let phone_numbers_type = [];
             let emails = [];
