@@ -3,7 +3,6 @@
     @parent
 @endsection
 @section('main')
-<div class="row">
 <div class="col-sm-12">
   @if(session()->get('success'))
     <div class="alert alert-success">
@@ -24,7 +23,11 @@
           <th class="th-sm">Nickname</th>
           <th class="th-sm">Date of Birth</th>
           <th class="th-sm">Gender</th>
-          <th class="th-sm" colspan = 3>Actions</th>
+          <th class="th-sm">View</th>
+            <th class="th-sm">Edit</th>
+            <th class="th-sm">Delete</th>
+            <th class="th-sm" style="display: none;">Phone Number</th>
+            <th class="th-sm" style="display: none;">Email</th>
         </tr>
     </thead>
     <tbody>
@@ -34,25 +37,22 @@
             <td>{{$contact->first_name}} {{$contact->last_name}}</td>
             <td>{{$contact->nick_name}}</td>
             <td>{{$contact->dob}}</td>
-            <td>{{$contact->gender}}</td>
+            <td>{{($contact->gender==1)?"Male":"Female"}}</td>
             <td>
-                <a class="btn btn-primary view" data-contact="{{$contact->id}}">View</a>
+                <a class="btn btn-info view" data-contact="{{$contact->id}}">View</a>
             </td>
             <td>
                 <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Edit</a>
             </td>
             <td>
-                <form action="{{ route('contacts.destroy', $contact->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
                   <a class="btn btn-danger delete" data-contact="{{$contact->id}}" >Delete</a>
-                </form>
             </td>
+            <td style="display: none;">{{$contact->telephones}}</td>
+            <td style="display: none;">{{$contact->emails}}</td>
         </tr>
         @endforeach
     </tbody>
   </table>
-<div>
 </div>
 
     <!-- Modal -->
@@ -84,7 +84,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td class="detail-name"></td>
+                        </tr>
+                        <tr>
+                            <td>NickName</td>
+                            <td class="detail-nickname"></td>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td class="detail-dob"></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td class="detail-gender"></td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number</td>
+                            <td class="detail-phone-number"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td class="detail-email"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -106,6 +133,7 @@
                 console.info('Ajax Call: Delete contact');
                 let urlToDelete = '{{ route("contacts.destroy", ":id") }}';
                 urlToDelete = urlToDelete.replace(':id', id);
+                console.info('Ajax Call - Resource: '+urlToDelete);
                 $.ajax({
                     type:'DELETE',
                     url:urlToDelete,
@@ -137,8 +165,44 @@
                     $(this).click(function(event){
                         event.preventDefault();
                         $('#showModal').modal('show');
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            }
+                        });
+                        console.info('Ajax Call: Find contact');
+                        let urlToGet = '{{ route("contacts.show", ":id") }}';
+                        urlToGet = urlToGet.replace(':id', $(this).data("contact"));
+                        console.info('Ajax Call - Resource: '+urlToGet);
+                        $.ajax({
+                            type:'GET',
+                            url:urlToGet,
+                            success:function(data){
+                                console.info('Ajax Call: Find contact - success');
+                                console.info('Ajax Call: Find contact - data:');
+                                console.info(data);
+                                $(".detail-name").html(data.contact.first_name + ' '+data.contact.last_name);
+                                $(".detail-nickname").html(data.contact.nick_name);
+                                $(".detail-dob").html(data.contact.dob);
+                                $(".detail-gender").html((data.contact.gender==="1")?"Male":"Female");
+                                let telephones = "";
+                                data.contact.telephones.forEach(function(item){
+                                    telephones = telephones+item.phone_number+'<br>';
+                                });
+                                $(".detail-phone-number").html(telephones);
+                                let emails = "";
+                                data.contact.emails.forEach(function(item){
+                                    emails = emails+item.email+'<br>';
+                                });
+                                $(".detail-email").html(emails);
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.error('Ajax Call: Find contact - Error '+errorThrown);
+                            }
+                        });
                     });
                 });
+                $('#selectedColumn').DataTable();
             });
         </script>
     @stop
