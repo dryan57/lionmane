@@ -17,7 +17,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('contacts.store') }}" name="contact">
+      <form name="contact">
           @csrf
           <div class="form-group">
               <label for="first_name">What’s your first name?:</label>
@@ -74,7 +74,7 @@
                   <button class="btn btn-outline-secondary" type="button" id="button-addon-email">+ (Add a another E-mail)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
               </div>
           </div>
-          <button type="submit" class="btn btn-outline-secondary" id="btn-submit">Add contact</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit">Add contact</button>
       </form>
   </div>
 </div>
